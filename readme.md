@@ -1,4 +1,4 @@
-# Best Store - Product Management System
+# EProduct - Product Management System
 
 ## 📌 Project Overview
 Best Store is a product management web application built using **Spring Boot** and **Thymeleaf**, providing an intuitive UI for adding, editing, and managing products. It features form validation, image upload support, and responsive design using **Bootstrap**.
