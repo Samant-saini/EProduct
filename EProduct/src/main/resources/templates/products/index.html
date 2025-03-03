@@ -5,46 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Best Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table img {
+            border-radius: 5px;
+        }
+        .btn-sm i {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center my-4">Product</h1>
-    <a class="btn btn-primary" href="/products/create">Products</a>
 
-    <table class="table mt-4">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Created At</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.brand}"></td>
-            <td th:text="${product.category}"></td>
-            <td th:text="${product.price} + ' $'"></td>
-<!--            <td>-->
-<!--                <img th:src="@{'/images/' + ${product.imageFileName}}" alt="" width="100">-->
-<!--            </td>-->
-            <td th:text="${product.createAt.toString().substring(0, 10)}"></td>
-            <td style="white-space: nowrap;">
-                <a class="btn btn-primary btn-sm" th:href="@{/products/edit(id=${product.id})}">Edit</a>
-                <a class="btn btn-danger btn-sm" th:href="@{/products/delete(id=${product.id})}"
-                   onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container mt-5">
+    <h1 class="text-center my-4">📦 Product List</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a class="btn btn-success" href="/products/create"><i class="fas fa-plus"></i> Add Product</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.category}"></td>
+                <td><span class="badge bg-primary" th:text="${product.price} + ' $'"></span></td>
+                <td>
+                    <img th:src="${product.imageName != null ? '/images/' + product.imageName : '/images/default.png'}"
+                         alt="Product Image" width="80" height="80">
+                </td>
+                <td th:text="${product.createAt.toString().substring(0, 10)}"></td>
+                <td>
+                    <a class="btn btn-sm btn-warning" th:href="@{/products/edit(id=${product.id})}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/products/delete(id=${product.id})}"
+                       onclick="return confirm('Are you sure you want to delete this product?');">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

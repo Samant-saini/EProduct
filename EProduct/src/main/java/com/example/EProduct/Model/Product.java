@@ -14,7 +14,7 @@ public class Product {
     private String Name;
     private String brand;
     private String category;
-    private int price;
+    private double price;
     @Column(columnDefinition = "TEXT")
     private String description;
     private Date CreateAt;
@@ -53,11 +53,11 @@ public class Product {
         this.category = category;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -84,4 +84,12 @@ public class Product {
     public void setImageName(String imageName) {
         ImageName = imageName;
     }
+
+    public void setCreatedAt(Date createdAt) {
+        this.CreateAt = createdAt;
+    }
+//public String getImageName() {
+//    return (ImageName == null || ImageName.isEmpty()) ? "lap.jpg" : ImageName;
+//}
+
 }
